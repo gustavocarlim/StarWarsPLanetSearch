@@ -1,17 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { fetchPlanets, Planet } from '../api';
+import { usePlanetContext } from '../ContextApi/PlanetContext';
 
 function Table() {
-  const [planetsData, setPlanetsData] = useState<Planet[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetchPlanets();
-      setPlanetsData(data);
-    };
-
-    fetchData();
-  }, []);
+  const { planets } = usePlanetContext();
 
   return (
     <div>
@@ -34,7 +24,7 @@ function Table() {
           </tr>
         </thead>
         <tbody>
-          {planetsData.map((planet, index) => (
+          {planets.map((planet, index) => (
             <tr key={ index }>
               <td>{planet.name}</td>
               <td>{planet.climate}</td>
